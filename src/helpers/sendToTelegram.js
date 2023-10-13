@@ -1,13 +1,12 @@
 const TELEGRAM_CHAT_ID = "@TestDailyRent";
-const TELEGRAM_BOT_TOKEN = "6499221709:AAE7QKkeUy7uyh0Ee0NFt2Bj4Ed4TVHeG-A";
-const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+const telegramApi = process.env.TELEGRAM_API
 
 
 export const sendToTelegram = async (data) => {
     const text = `Messege from Form: ${JSON.stringify(data)}`;
 
     try {
-        const response = await fetch(TELEGRAM_API, {
+        const response = await fetch(telegramApi, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
