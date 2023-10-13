@@ -34,57 +34,62 @@ const FormikForm = () => {
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            <Form className={styles.form}>
-                <div className={styles.inputWrap}>
-                    <label htmlFor='userName' className={styles.label}>
-                        Ім’я
-                    </label>
-                    <Field
-                        type='text'
-                        name='userName'
-                        id='userName'
-                        className={styles.input}
-                    />
-                    <ErrorMessage
-                        name='userName'
-                        className={styles.error}
-                        component='p'
-                    />
-                </div>
-                <div className={styles.inputWrap}>
-                    <label htmlFor='phone' className={styles.label}>
-                        Номер телефону
-                    </label>
-                    <Field
-                        type='text'
-                        name='phone'
-                        id='phone'
-                        className={styles.input}
-                    />
-                    <ErrorMessage
-                        name='phone'
-                        className={styles.error}
-                        component='p'
-                    />
-                </div>
-                <div className={styles.inputWrap}>
-                    <label htmlFor='objNumber' className={styles.label}>
-                        Номер
-                    </label>
-                    <Field
-                        type='text'
-                        name='objNumber'
-                        id='objNumber'
-                        className={styles.input}
-                    />
-                    <ErrorMessage
-                        name='objNumber'
-                        className={styles.error}
-                        component='p'
-                    />
-                </div>
-                <button type='submit'>Submit</button>
-            </Form>
+            {(formik) => {
+                console.log("Formik props", formik);
+                return (
+                    <Form className={styles.form}>
+                        <div className={styles.inputWrap}>
+                            <label htmlFor='userName' className={styles.label}>
+                                Ім’я
+                            </label>
+                            <Field
+                                type='text'
+                                name='userName'
+                                id='userName'
+                                className={styles.input}
+                            />
+                            <ErrorMessage
+                                name='userName'
+                                className={styles.error}
+                                component='p'
+                            />
+                        </div>
+                        <div className={styles.inputWrap}>
+                            <label htmlFor='phone' className={styles.label}>
+                                Номер телефону
+                            </label>
+                            <Field
+                                type='text'
+                                name='phone'
+                                id='phone'
+                                className={styles.input}
+                            />
+                            <ErrorMessage
+                                name='phone'
+                                className={styles.error}
+                                component='p'
+                            />
+                        </div>
+                        <div className={styles.inputWrap}>
+                            <label htmlFor='objNumber' className={styles.label}>
+                                Номер об’єкту
+                            </label>
+                            <Field
+                                type='text'
+                                name='objNumber'
+                                id='objNumber'
+                                className={styles.input}
+                            />
+                            <ErrorMessage
+                                name='objNumber'
+                                className={styles.error}
+                                component='p'
+                            />
+                        </div>
+                        <button type='submit'>Submit</button>
+                    </Form>
+                );
+            }}
         </Formik>
     );
 };
