@@ -1,0 +1,65 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.innerWrap {
+    width: 300px;
+    // @media screen and (min-width: 968px) {
+    //     display: flex;
+    //     width: 720px;
+    //     justify-content: space-between;
+    //     position: relative;
+    // }
+}
+
+.label {
+    position: relative;
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+.iconSvg {
+    position: absolute;
+    bottom: 24px;
+    left: 10px;
+    width: 16px;
+    height: 16px;
+    fill: #c7c7c7;
+}
+
+.iconSvgRight {
+    position: absolute;
+    bottom: 24px;
+    left: 270px;
+    width: 20px;
+    height: 20px;
+    fill: #000;
+    cursor: pointer;
+}
+
+.inputPic {
+    width: 250px;
+    height: 35px;
+    margin-bottom: 15px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(199, 199, 199, 1);
+    padding-left: 32px;
+    cursor: pointer;
+}
+
+.wrapError {
+    position: relative;
+    width: 100%;
+}
+
+.error {
+    position: absolute;
+    bottom: 50px;
+    left: 140px;
+    color: red;
+    font-size: 14px;
+}
