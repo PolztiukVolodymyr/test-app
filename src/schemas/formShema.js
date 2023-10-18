@@ -10,7 +10,7 @@ export const formSchema = Yup.object({
         .required("Заповніть це поле"),
     phone: Yup.string()
         .matches(phoneRegExp, "+380123456789")
-        .required("Заповніть це поле"),
+        .required('Заповніть це поле'),
     objNumber: Yup.number()
         .moreThan(-1, "Тільки позитивні цифри")
         .typeError("Тільки цифри")
@@ -26,6 +26,10 @@ export const formSchema = Yup.object({
                 return true;
             },
         })
+        .required('Заповніть це поле'),
+    checkIn: Yup.string()
+        .required('Заповніть це поле'),
 
-        .required("Заповніть це поле"),
+    checkOut: Yup.string()
+        .required('Заповніть це поле')
 });
