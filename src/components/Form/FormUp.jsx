@@ -4,7 +4,7 @@ import { addDays, subDays, formatDate } from "../../helpers/dateHelper";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./Form.module.scss";
 
-const FormUp = () => {
+const FormUp = ({ closeModal }) => {
     const [form, setForm] = useState({
         userName: "",
         phone: "",
@@ -175,6 +175,7 @@ const FormUp = () => {
         console.log("data:", formData);
         // console.log("formSubmit:", form);
         reset();
+        closeModal();
     };
 
     const reset = () => {

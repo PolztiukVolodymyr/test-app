@@ -1,35 +1,35 @@
 .backdrop {
-  position: fixed;
-  top: 0rem;
-  left: 0rem;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.55);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 1s;
+    position: fixed;
+    top: 0rem;
+    left: 0rem;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 1s;
 }
 
 .backdrop.active {
-  opacity: 1;
-  pointer-events: all;
+    opacity: 1;
+    pointer-events: all;
 }
 
 .modalContent {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 6px;
-  width: 400px;
-  height: 250px;
-  opacity: 0;
-  transform: translateX(100vw);
-  transition: all 1s;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    width: 400px;
+    height: 500px;
+    opacity: 0;
+    transform: translateX(100vw);
+    transition: all 1s;
 }
 
 .modalContent.activeContent {
-  opacity: 1;
-  transform: translateX(0);
+    opacity: 1;
+    transform: translateX(0);
 }

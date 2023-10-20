@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { formSchema } from "../../schemas/formShema";
 import { addDays, subDays, formatDate } from "../../helpers/dateHelper";
+
 import styles from "./FormikForm.module.scss";
 
 const initialValues = {
@@ -13,28 +14,34 @@ const initialValues = {
     checkOut: null,
 };
 
-const onSubmit = (values, submitProps) => {
+const handleSubmit = (values, actions, closeModal) => {
     const formedValues = {
         ...values,
         checkIn: formatDate(values.checkIn),
         checkOut: formatDate(values.checkOut),
     };
-    console.log("Form data values:", values);
+    // console.log("Form data values:", values);
     console.log("formedValues:", formedValues);
-    // console.log("submitProps", submitProps);
-    submitProps.setSubmitting(false);
-    submitProps.resetForm();
+    console.log({ values, actions, closeModal });
+    actions.setSubmitting(false);
+    actions.resetForm();
+    closeModal();
 };
 
-const FormikForm = () => {
+const FormikForm = ({ closeModal }) => {
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={formSchema}
-            onSubmit={onSubmit}
+            // onSubmit={onSubmit}
+            onSubmit={(values, actions) => {
+                handleSubmit(values, actions, closeModal);
+            }}
         >
             {({ errors, touched, isValid, values }) => {
-                // console.log("Formik Values:", values);
+                // console.log("Formik isValid:", isValid);
+                // console.log("handleSubmit:", handleSubmit);
+
                 return (
                     <Form className={styles.form}>
                         <div className={styles.inputWrap}>
@@ -230,7 +237,17 @@ const FormikForm = () => {
                             />
                         </div>
 
-                        <button disabled={!isValid} type='submit'>
+                        <button
+                            disabled={!isValid}
+                            type='submit'
+                            // onClick={
+                            //     isValid && values.userName
+                            //         ? setTimeout(function () {
+                            //               closeModal();
+                            //           }, 1000)
+                            //         : null
+                            // }
+                        >
                             Submit
                         </button>
                     </Form>

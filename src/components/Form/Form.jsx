@@ -5,7 +5,7 @@ import { addDays, subDays, formatDate } from "../../helpers/dateHelper";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./Form.module.scss";
 
-const Form = () => {
+const Form = ({ closeModal }) => {
     const [checkIn, setCheckIn] = useState(null);
     const [checkOut, setCheckOut] = useState(null);
 
@@ -58,6 +58,7 @@ const Form = () => {
         //     console.log(error);
         // }
         reset();
+        closeModal();
     };
 
     const reset = () => {
