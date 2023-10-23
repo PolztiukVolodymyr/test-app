@@ -17,8 +17,8 @@ const initialValues = {
 const handleSubmit = (values, actions, closeModal) => {
     const formedValues = {
         ...values,
-        checkIn: formatDate(values.checkIn),
-        checkOut: formatDate(values.checkOut),
+        checkIn: values.checkIn ? formatDate(values.checkIn) : null,
+        checkOut: values.checkOut ? formatDate(values.checkOut) : null,
     };
     // console.log("Form data values:", values);
     console.log("formedValues:", formedValues);
@@ -237,17 +237,7 @@ const FormikForm = ({ closeModal }) => {
                             />
                         </div>
 
-                        <button
-                            disabled={!isValid}
-                            type='submit'
-                            // onClick={
-                            //     isValid && values.userName
-                            //         ? setTimeout(function () {
-                            //               closeModal();
-                            //           }, 1000)
-                            //         : null
-                            // }
-                        >
+                        <button disabled={!isValid} type='submit'>
                             Submit
                         </button>
                     </Form>

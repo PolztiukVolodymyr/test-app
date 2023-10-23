@@ -17,7 +17,8 @@ export const formSchema = Yup.object({
         .test({
             name: "objNumber",
             test(value, ctx) {
-                if (!listOfNumbers.includes(String(value))) {
+                // console.log('value:', value)
+                if (!listOfNumbers.includes(String(value)) && value) {
                     return ctx.createError({
                         message: "Такого номера немає",
                     });
@@ -26,10 +27,14 @@ export const formSchema = Yup.object({
                 return true;
             },
         })
-        .required('Заповніть це поле'),
+    // .required('Заповніть це поле')
+    ,
     checkIn: Yup.string()
-        .required('Заповніть це поле'),
+        .nullable()
+    // .required('Заповніть це поле')
+    ,
 
     checkOut: Yup.string()
-        .required('Заповніть це поле')
+        .nullable()
+    // .required('Заповніть це поле')
 });
