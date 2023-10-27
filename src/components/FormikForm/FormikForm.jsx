@@ -1,4 +1,12 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useEffect } from "react";
+import {
+    Formik,
+    Form,
+    Field,
+    ErrorMessage,
+    validateYupSchema,
+    yupToFormErrors,
+} from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { formSchema } from "../../schemas/formShema";
@@ -15,30 +23,52 @@ const initialValues = {
 };
 
 const handleSubmit = (values, actions, closeModal) => {
-    const formedValues = {
+    const formatedFormData = {
         ...values,
         checkIn: values.checkIn ? formatDate(values.checkIn) : null,
         checkOut: values.checkOut ? formatDate(values.checkOut) : null,
     };
     // console.log("Form data values:", values);
     // console.log("Form data values:", values);
-    console.log("formedValues:", formedValues);
+    console.log("formatedFormData:", formatedFormData);
     console.log({ values, actions, closeModal });
     actions.setSubmitting(true);
 
     setTimeout(() => {
         closeModal();
-        actions.resetForm();
-        actions.setSubmitting(false);
+        setTimeout(() => {
+            actions.resetForm();
+            actions.setSubmitting(false);
+        }, 300);
     }, 2000);
-    // closeModal();
 };
 
-const FormikForm = ({ closeModal }) => {
+const FormikForm = ({ isOpen, closeModal }) => {
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        }
+        return () => {
+            document.body.style.overflow = "unset";
+            // document.body.scrollTop = 0; //For Safari
+            // document.documentElement.scrollTop = 0;
+            window.scrollTo(0, 0);
+        };
+    }, [isOpen]);
+    const someContext = ["5", "10", "15", "20", "44", "55"];
     return (
         <Formik
             initialValues={initialValues}
-            validationSchema={formSchema}
+            // validationSchema={formSchema}
+            validate={(values) => {
+                try {
+                    validateYupSchema(values, formSchema, true, someContext);
+                } catch (err) {
+                    return yupToFormErrors(err); //for rendering validation errors
+                }
+
+                return {};
+            }}
             onSubmit={(values, actions) => {
                 handleSubmit(values, actions, closeModal);
             }}
@@ -67,7 +97,8 @@ const FormikForm = ({ closeModal }) => {
                                         type='text'
                                         name='userName'
                                         id='userName'
-                                        placeholder='Ім’я'
+                                        placeholder='Ім’я *'
+                                        autoComplete='off'
                                         maxLength='30'
                                         className={
                                             errors.userName && touched.userName
@@ -92,7 +123,8 @@ const FormikForm = ({ closeModal }) => {
                                         type='text'
                                         name='phone'
                                         id='phone'
-                                        placeholder='Номер телефону'
+                                        placeholder='Номер телефону *'
+                                        autoComplete='off'
                                         maxLength='20'
                                         className={
                                             errors.phone && touched.phone
@@ -119,6 +151,7 @@ const FormikForm = ({ closeModal }) => {
                                         id='objNumber'
                                         maxLength='3'
                                         placeholder='Номер об’єкту'
+                                        autoComplete='off'
                                         className={
                                             errors.objNumber &&
                                             touched.objNumber
@@ -159,6 +192,7 @@ const FormikForm = ({ closeModal }) => {
                                                             : styles.input
                                                     }
                                                     placeholderText='Дата заїзду'
+                                                    autoComplete='off'
                                                     {...field}
                                                     selected={value}
                                                     onChange={(val) =>
@@ -228,6 +262,7 @@ const FormikForm = ({ closeModal }) => {
                                                             : styles.input
                                                     }
                                                     placeholderText='Дата виїзду'
+                                                    autoComplete='off'
                                                     {...field}
                                                     selected={value}
                                                     onChange={(val) =>
@@ -258,6 +293,9 @@ const FormikForm = ({ closeModal }) => {
                                         component='p'
                                     />
                                 </div>
+                                <p className={styles.explainText}>
+                                    *- поле, обовʼязкове для заповнення
+                                </p>
 
                                 <button disabled={!isValid} type='submit'>
                                     Submit

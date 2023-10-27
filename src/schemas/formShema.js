@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import { phoneRegExp } from "../helpers/regularExp";
 
-const listOfNumbers = ["1", "2", "3", "4", "55", "77", "99"];
+// const listOfNumbers = ["1", "2", "3", "4", "55", "77", "99"];
 
 export const formSchema = Yup.object({
     userName: Yup.string()
@@ -17,7 +17,8 @@ export const formSchema = Yup.object({
         .test({
             name: "objNumber",
             test(value, ctx) {
-                // console.log('value:', value)
+                // console.log('this.options.context:', this.options.context)
+                const listOfNumbers = this.options.context;
                 if (!listOfNumbers.includes(String(value)) && value) {
                     return ctx.createError({
                         message: "Такого номера немає",

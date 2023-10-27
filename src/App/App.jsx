@@ -110,8 +110,6 @@ function App() {
                 <div className={styles.formWrap}>
                     <Form closeModal={() => setSipleModalOpen(false)} />
                 </div>
-
-                {/* <SomeContent isOpen={isSipleModalOpen} /> */}
             </SimpleModal>
             <ReactModal
                 active={isReactModalOpen}
@@ -121,9 +119,11 @@ function App() {
                 <h3>ReactModal & FormikForm</h3>
 
                 <div className={styles.formWrap}>
-                    <FormikForm closeModal={() => setReactModalOpen(false)} />
+                    <FormikForm
+                        isOpen={isReactModalOpen}
+                        closeModal={() => setReactModalOpen(false)}
+                    />
                 </div>
-                {/* <SomeContent isOpen={isReactModalOpen} /> */}
             </ReactModal>
 
             {/* <ModalUlbi active={modalActiveUL} setActive={setModalActiveUL} /> */}
