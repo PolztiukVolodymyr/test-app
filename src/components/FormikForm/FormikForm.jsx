@@ -10,7 +10,8 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { formSchema } from "../../schemas/formShema";
-import { addDays, subDays, formatDate } from "../../helpers/dateHelper";
+import { addDays, subDays } from "../../helpers/dateHelper";
+import { sendToTelegram } from "../../helpers/sendToTelegram";
 
 import styles from "./FormikForm.module.scss";
 
@@ -23,14 +24,9 @@ const initialValues = {
 };
 
 const handleSubmit = (values, actions, closeModal) => {
-    const formatedFormData = {
-        ...values,
-        checkIn: values.checkIn ? formatDate(values.checkIn) : null,
-        checkOut: values.checkOut ? formatDate(values.checkOut) : null,
-    };
     // console.log("Form data values:", values);
     // console.log("Form data values:", values);
-    console.log("formatedFormData:", formatedFormData);
+    sendToTelegram(values);
     console.log({ values, actions, closeModal });
     actions.setSubmitting(true);
 
