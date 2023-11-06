@@ -189,8 +189,11 @@ const FormikForm = ({ isOpen, closeModal }) => {
                                                     }
                                                     placeholderText='Дата заїзду'
                                                     autoComplete='off'
-                                                    {...field}
+                                                    // {...field}
                                                     selected={value}
+                                                    onFocus={(e) =>
+                                                        e.target.blur()
+                                                    } // block input from the keyboard
                                                     onChange={(val) =>
                                                         setFieldValue(
                                                             "checkIn",
@@ -259,8 +262,12 @@ const FormikForm = ({ isOpen, closeModal }) => {
                                                     }
                                                     placeholderText='Дата виїзду'
                                                     autoComplete='off'
-                                                    {...field}
+                                                    // {...field}
+                                                    disabled={!values.checkIn}
                                                     selected={value}
+                                                    onFocus={(e) =>
+                                                        e.target.blur()
+                                                    } // block input from the keyboard
                                                     onChange={(val) =>
                                                         setFieldValue(
                                                             "checkOut",

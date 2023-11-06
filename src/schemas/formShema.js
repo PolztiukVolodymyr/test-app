@@ -37,5 +37,37 @@ export const formSchema = Yup.object({
 
     checkOut: Yup.string()
         .nullable()
+    // .when('checkIn',
+    //     (checkIn, formSchema) => {
+    //         console.log('checkIn[0]', checkIn[0])
+    //         console.log('checkOut', checkOut)
+    //         // const qwe = document.getElementById("#checkOut")
+    //         // console.log('qwe', qwe.value)
+    //         if (checkIn) {
+    //             const dayAfter = new Date(startDate.getTime() + 86400000);
+
+    //             return formSchema.min(dayAfter, 'Невірна послідовність дат');
+    //         }
+
+    //         return formSchema;
+
+    //     }),
+
+    // checkOut: Yup.date()
+    //     .nullable()
+    //     .test({
+    //         name: "checkOut",
+    //         test(value, ctx) {
+    //             console.log('YUP values:', value)
+
+    //             if (value.checkIn && value.checkOut && value.checkIn > value.checkOut) {
+    //                 return ctx.createError({
+    //                     message: "Невірна послідовність дат",
+    //                 });
+    //             }
+
+    //             return true;
+    //         },
+    //     })
     // .required('Заповніть це поле')
 });
