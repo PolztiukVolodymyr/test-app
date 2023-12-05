@@ -34,29 +34,6 @@ const Form = ({ closeModal }) => {
         };
         // sendToTelegram(data);
         console.log("data:", data);
-
-        // try {
-        //     const response = await fetch(TELEGRAM_API, {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             "Access-Control-Allow-Origin": "*",
-        //             "Access-Control-Allow-Methods": "POST",
-        //         },
-        //         body: JSON.stringify({
-        //             chat_id: TELEGRAM_CHAT_ID,
-        //             text,
-        //         }),
-        //     });
-
-        //     if (response.ok) {
-        //         console.log("To telegram sent:", data);
-        //     } else {
-        //         throw new Error(response.statusText);
-        //     }
-        // } catch (error) {
-        //     console.log(error);
-        // }
         reset();
         closeModal();
     };

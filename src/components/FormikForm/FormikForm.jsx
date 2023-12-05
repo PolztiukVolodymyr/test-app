@@ -73,9 +73,7 @@ const FormikForm = ({ isOpen, closeModal }) => {
                 const { errors, touched, isValid, values, isSubmitting } =
                     formik;
                 // console.log("formik:", formik);
-                // console.log("handleSubmit:", handleSubmit);
                 // console.log("Formik isSubmitting:", isSubmitting);
-
                 return (
                     <>
                         {isSubmitting ? (
