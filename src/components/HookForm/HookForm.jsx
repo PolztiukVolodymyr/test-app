@@ -1,15 +1,33 @@
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { emailRegExp } from "../../helpers/regularExp";
-import { getDefaultValuesFromApi } from "../../helpers/fetchFakeApi";
+// import { getDefaultValuesFromApi } from "../../helpers/fetchFakeApi";
 import styles from "./HookForm.module.scss";
+import { useEffect } from "react";
 
 const HookForm = () => {
-    const form = useForm({
-        defaultValues: getDefaultValuesFromApi,
-    });
-    const { register, control, handleSubmit, formState } = form;
-    const { errors } = formState;
+    // const form = useForm({ defaultValues: getDefaultValuesFromApi });
+    const initialValues = {
+        defaultValues: {
+            userName: "",
+            email: "",
+            social: {
+                twitter: "",
+                facebook: "",
+            },
+        },
+    };
+
+    const form = useForm(initialValues);
+    const { register, control, handleSubmit, formState, watch, reset } = form;
+    const { errors, isSubmitting, isSubmitSuccessful } = formState;
+    // console.log("errors:", Object.keys(errors).length);
+
+    useEffect(() => {
+        if (isSubmitSuccessful) {
+            reset();
+        }
+    }, [isSubmitSuccessful, reset]);
 
     const onSubmit = (data) => {
         console.log("Form submited", data);
@@ -48,6 +66,7 @@ const HookForm = () => {
                             value: emailRegExp,
                             message: "invalid email",
                         },
+                        disabled: watch("userName") === "",
                         validate: {
                             notAdmin: (fielValue) => {
                                 return (
@@ -70,7 +89,25 @@ const HookForm = () => {
                         },
                     })}
                 />
-                <button>Submit</button>
+                <label htmlFor='twitter' className={styles.label}>
+                    Twitter
+                </label>
+
+                <input
+                    id='twitter'
+                    type='text'
+                    {...register("social.twitter")}
+                />
+                <label htmlFor='facebook' className={styles.label}>
+                    Facebook
+                </label>
+
+                <input
+                    id='facebook'
+                    type='text'
+                    {...register("social.facebook")}
+                />
+                <button disabled={isSubmitting}>Submit</button>
             </form>
             <DevTool control={control} />
         </div>
