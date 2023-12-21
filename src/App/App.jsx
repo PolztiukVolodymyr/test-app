@@ -7,6 +7,7 @@ import ReactModal from "../components/ReactModal/ReactModal";
 import Form from "../components/Form/Form";
 import FormUp from "../components/Form/FormUp";
 import FormikForm from "../components/FormikForm/FormikForm";
+import HoockForm from "../components/HookForm/HookForm";
 import styles from "./App.module.scss";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 
     const [isSipleModalOpen, setSipleModalOpen] = useState(false);
     const [isReactModalOpen, setReactModalOpen] = useState(false);
+    const [isReactModalOpenH, setReactModalOpenH] = useState(false);
 
     function openModal() {
         setShouldRender(true);
@@ -39,55 +41,6 @@ function App() {
 
                 {/* <button onClick={() => setModalActiveUL(true)}>ModalUlbi</button> */}
                 <button onClick={openModal}>ModalTest</button>
-
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Quam fugit illum minima. Architecto voluptatum debitis,
-                    natus dolores ullam non, ut voluptatem repellat minima
-                    quisquam deleniti commodi quos! Sapiente, esse quo?
-                </p>
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Quam fugit illum minima. Architecto voluptatum debitis,
-                    natus dolores ullam non, ut voluptatem repellat minima
-                    quisquam deleniti commodi quos! Sapiente, esse quo?
-                </p>
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Quam fugit illum minima. Architecto voluptatum debitis,
-                    natus dolores ullam non, ut voluptatem repellat minima
-                    quisquam deleniti commodi quos! Sapiente, esse quo?
-                </p>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quo, dolorum dolore vero eligendi cum iusto ea quam
-                    perspiciatis veritatis rem cupiditate a in, aliquam
-                    pariatur.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quo, dolorum dolore vero eligendi cum iusto ea quam
-                    perspiciatis veritatis rem cupiditate a in, aliquam
-                    pariatur.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quo, dolorum dolore vero eligendi cum iusto ea quam
-                    perspiciatis veritatis rem cupiditate a in, aliquam
-                    pariatur.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quo, dolorum dolore vero eligendi cum iusto ea quam
-                    perspiciatis veritatis rem cupiditate a in, aliquam
-                    pariatur.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quo, dolorum dolore vero eligendi cum iusto ea quam
-                    perspiciatis veritatis rem cupiditate a in, aliquam
-                    pariatur.
-                </p>
                 <button
                     className='modal-show-button'
                     onClick={() => setReactModalOpen(true)}
@@ -101,6 +54,62 @@ function App() {
                 >
                     Modal Transition
                 </button>
+                <button
+                    className='modal-show-button'
+                    onClick={() => setReactModalOpenH(true)}
+                >
+                    React Modal + HookForm
+                </button>
+
+                <p>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Quam fugit illum minima. Architecto voluptatum debitis,
+                    natus dolores ullam non, ut voluptatem repellat minima
+                    quisquam deleniti commodi quos! Sapiente, esse quo?
+                </p>
+                <p>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Quam fugit illum minima. Architecto voluptatum debitis,
+                    natus dolores ullam non, ut voluptatem repellat minima
+                    quisquam deleniti commodi quos! Sapiente, esse quo?
+                </p>
+                <p>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Quam fugit illum minima. Architecto voluptatum debitis,
+                    natus dolores ullam non, ut voluptatem repellat minima
+                    quisquam deleniti commodi quos! Sapiente, esse quo?
+                </p>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Quo, dolorum dolore vero eligendi cum iusto ea quam
+                    perspiciatis veritatis rem cupiditate a in, aliquam
+                    pariatur.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Quo, dolorum dolore vero eligendi cum iusto ea quam
+                    perspiciatis veritatis rem cupiditate a in, aliquam
+                    pariatur.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Quo, dolorum dolore vero eligendi cum iusto ea quam
+                    perspiciatis veritatis rem cupiditate a in, aliquam
+                    pariatur.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Quo, dolorum dolore vero eligendi cum iusto ea quam
+                    perspiciatis veritatis rem cupiditate a in, aliquam
+                    pariatur.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Quo, dolorum dolore vero eligendi cum iusto ea quam
+                    perspiciatis veritatis rem cupiditate a in, aliquam
+                    pariatur.
+                </p>
+
                 <p>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     Quo, dolorum dolore vero eligendi cum iusto ea quam
@@ -128,6 +137,21 @@ function App() {
                     <FormikForm
                         isOpen={isReactModalOpen}
                         closeModal={() => setReactModalOpen(false)}
+                    />
+                </div>
+            </ReactModal>
+
+            <ReactModal
+                active={isReactModalOpenH}
+                closeModal={() => setReactModalOpenH(false)}
+            >
+                <button onClick={() => setReactModalOpenH(false)}>+</button>
+                <h3>ReactModal & HoockForm</h3>
+
+                <div className={styles.formWrap}>
+                    <HoockForm
+                        isOpen={isReactModalOpen}
+                        closeModal={() => setReactModalOpenH(false)}
                     />
                 </div>
             </ReactModal>

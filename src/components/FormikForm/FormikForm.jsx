@@ -48,7 +48,7 @@ const FormikForm = ({ isOpen, closeModal }) => {
             document.body.style.overflow = "unset";
             // document.body.scrollTop = 0; //For Safari
             // document.documentElement.scrollTop = 0;
-            window.scrollTo(0, 0);
+            // window.scrollTo(0, 0);
         };
     }, [isOpen]);
     const someContext = ["5", "10", "15", "20", "44", "55"];
