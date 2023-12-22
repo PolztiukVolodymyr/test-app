@@ -17,13 +17,14 @@ const HookForm = () => {
                 facebook: "",
             },
         },
+        mode: "onChange", // mode also can be onBlur, onTouched, all
     };
 
     const form = useForm(initialValues);
     const { register, control, handleSubmit, formState, watch, reset } = form;
     const { errors, isSubmitting, isSubmitSuccessful } = formState;
 
-    let isErrors = Object.keys(errors).length > 0;
+    // let isErrors = Object.keys(errors).length > 0;
 
     useEffect(() => {
         if (isSubmitSuccessful) {
@@ -116,7 +117,14 @@ const HookForm = () => {
                     type='text'
                     {...register("social.facebook")}
                 />
-                <button disabled={isErrors || isSubmitting}>Submit</button>
+                <button
+                    disabled={
+                        // isErrors ||
+                        isSubmitting
+                    }
+                >
+                    Submit
+                </button>
             </form>
             <DevTool control={control} />
         </div>

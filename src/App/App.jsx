@@ -7,7 +7,8 @@ import ReactModal from "../components/ReactModal/ReactModal";
 import Form from "../components/Form/Form";
 import FormUp from "../components/Form/FormUp";
 import FormikForm from "../components/FormikForm/FormikForm";
-import HoockForm from "../components/HookForm/HookForm";
+// import HoockForm from "../components/HookForm/HookForm";
+import YupHoockForm from "../components/HookForm/YupHookForm";
 import styles from "./App.module.scss";
 
 function App() {
@@ -149,7 +150,11 @@ function App() {
                 <h3>ReactModal & HoockForm</h3>
 
                 <div className={styles.formWrap}>
-                    <HoockForm
+                    {/* <HoockForm
+                        isOpen={isReactModalOpen}
+                        closeModal={() => setReactModalOpenH(false)}
+                    /> */}
+                    <YupHoockForm
                         isOpen={isReactModalOpen}
                         closeModal={() => setReactModalOpenH(false)}
                     />

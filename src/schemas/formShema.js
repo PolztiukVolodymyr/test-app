@@ -1,8 +1,6 @@
 import * as Yup from "yup";
 import { phoneRegExp } from "../helpers/regularExp";
 
-// const listOfNumbers = ["1", "2", "3", "4", "55", "77", "99"];
-
 export const formSchema = Yup.object({
     userName: Yup.string()
         .min(2, "Ім’я має бути довшим")
