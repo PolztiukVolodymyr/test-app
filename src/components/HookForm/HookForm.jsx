@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { emailRegExp } from "../../helpers/regularExp";
 // import { getDefaultValuesFromApi } from "../../helpers/fetchFakeApi";
+import { isEmailExist } from "../../helpers/fetchFakeApi";
 import styles from "./HookForm.module.scss";
 import { useEffect } from "react";
 
@@ -21,7 +22,8 @@ const HookForm = () => {
     const form = useForm(initialValues);
     const { register, control, handleSubmit, formState, watch, reset } = form;
     const { errors, isSubmitting, isSubmitSuccessful } = formState;
-    // console.log("errors:", Object.keys(errors).length);
+
+    let isErrors = Object.keys(errors).length > 0;
 
     useEffect(() => {
         if (isSubmitSuccessful) {
@@ -43,7 +45,9 @@ const HookForm = () => {
                 <label htmlFor='userName' className={styles.label}>
                     Username
                 </label>
-                <p className={styles.error}>{errors.userName?.message}</p>
+                {errors.userName && (
+                    <p className={styles.error}>{errors.userName?.message}</p>
+                )}
                 <input
                     id='userName'
                     type='text'
@@ -57,7 +61,10 @@ const HookForm = () => {
                 <label htmlFor='email' className={styles.label}>
                     Email
                 </label>
-                <p className={styles.error}>{errors.email?.message}</p>
+
+                {errors.email && (
+                    <p className={styles.error}>{errors.email?.message}</p>
+                )}
                 <input
                     id='email'
                     type='email'
@@ -77,7 +84,7 @@ const HookForm = () => {
                             notCat: (fielValue) => {
                                 return (
                                     fielValue !== "cat11@mail.ua" ||
-                                    "Only for dogs !"
+                                    "Not for cats !"
                                 );
                             },
                             notBlackList: (fielValue) => {
@@ -86,6 +93,8 @@ const HookForm = () => {
                                     "This domen is not supported"
                                 );
                             },
+                            checkFreeEmails: (fielValue) =>
+                                isEmailExist(fielValue),
                         },
                     })}
                 />
@@ -107,7 +116,7 @@ const HookForm = () => {
                     type='text'
                     {...register("social.facebook")}
                 />
-                <button disabled={isSubmitting}>Submit</button>
+                <button disabled={isErrors || isSubmitting}>Submit</button>
             </form>
             <DevTool control={control} />
         </div>

@@ -40,14 +40,7 @@ function App() {
                 <div className={styles.formWrap}>{/* <Form /> */}</div>
 
                 {/* <button onClick={() => setModalActiveUL(true)}>ModalUlbi</button> */}
-                <button onClick={openModal}>ModalTest</button>
-                <button
-                    className='modal-show-button'
-                    onClick={() => setReactModalOpen(true)}
-                >
-                    React Modal
-                </button>
-
+                <button onClick={openModal}>Custom Modal</button>
                 <button
                     className='modal-show-button'
                     onClick={() => setSipleModalOpen(true)}
@@ -56,9 +49,16 @@ function App() {
                 </button>
                 <button
                     className='modal-show-button'
+                    onClick={() => setReactModalOpen(true)}
+                >
+                    R_Modal & FormikForm
+                </button>
+
+                <button
+                    className='modal-show-button'
                     onClick={() => setReactModalOpenH(true)}
                 >
-                    React Modal + HookForm
+                    R_Modal & HookForm
                 </button>
 
                 <p>
