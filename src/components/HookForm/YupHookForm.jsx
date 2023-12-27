@@ -1,16 +1,8 @@
-import * as yup from "yup";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { hookFormSchema } from "../../schemas/hookFormShema";
 import styles from "./HookForm.module.scss";
-
-const schema = yup.object({
-    username: yup.string().required("Username is required"),
-    email: yup
-        .string()
-        .email("Email format is not valid")
-        .required("Email is required"),
-    comment: yup.string().required("Comment is required"),
-});
 
 const YupHookForm = () => {
     const initialValues = {
@@ -19,17 +11,22 @@ const YupHookForm = () => {
             email: "",
             comment: "",
         },
-        resolver: yupResolver(schema),
+        resolver: yupResolver(hookFormSchema),
     };
 
     const form = useForm(initialValues);
-
-    const { register, handleSubmit, formState } = form;
-    const { errors } = formState;
+    const { register, handleSubmit, formState, reset } = form;
+    const { errors, isSubmitSuccessful } = formState;
 
     const onSubmit = (data) => {
         console.log(data);
     };
+    useEffect(() => {
+        if (isSubmitSuccessful) {
+            reset();
+        }
+    }, [isSubmitSuccessful, reset]);
+
     return (
         <div>
             <h2>Yup Hook Form</h2>

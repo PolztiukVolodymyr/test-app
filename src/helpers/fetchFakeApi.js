@@ -1,4 +1,4 @@
-export const getDefaultValuesFromApi = async () => {
+export const getDefaultUsersEmailFromApi = async () => {
     const response = await fetch(
         "https://jsonplaceholder.typicode.com/users/1"
     );

@@ -1,13 +1,13 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { emailRegExp } from "../../helpers/regularExp";
-// import { getDefaultValuesFromApi } from "../../helpers/fetchFakeApi";
+// import { getDefaultUsersEmailFromApi } from "../../helpers/fetchFakeApi";
 import { isEmailExist } from "../../helpers/fetchFakeApi";
 import styles from "./HookForm.module.scss";
-import { useEffect } from "react";
 
 const HookForm = () => {
-    // const form = useForm({ defaultValues: getDefaultValuesFromApi });
+    // const form = useForm({ defaultValues: getDefaultUsersEmailFromApi });
     const initialValues = {
         defaultValues: {
             userName: "",
