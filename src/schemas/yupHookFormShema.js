@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const hookFormSchema = yup.object({
+export const YupHookFormSchema = yup.object({
     username: yup.string().required("Username is required"),
     email: yup
         .string()

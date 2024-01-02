@@ -8,7 +8,8 @@ import Form from "../components/Form/Form";
 import FormUp from "../components/Form/FormUp";
 import FormikForm from "../components/FormikForm/FormikForm";
 // import HoockForm from "../components/HookForm/HookForm";
-import YupHoockForm from "../components/HookForm/YupHookForm";
+// import YupHoockForm from "../components/HookForm/YupHookForm";
+import ZodHoockForm from "../components/HookForm/ZodHookForm";
 import styles from "./App.module.scss";
 
 function App() {
@@ -147,14 +148,17 @@ function App() {
                 closeModal={() => setReactModalOpenH(false)}
             >
                 <button onClick={() => setReactModalOpenH(false)}>+</button>
-                <h3>ReactModal & HoockForm</h3>
-
+                {/* <h3>ReactModal & HoockForm</h3> */}
                 <div className={styles.formWrap}>
                     {/* <HoockForm
                         isOpen={isReactModalOpen}
                         closeModal={() => setReactModalOpenH(false)}
                     /> */}
-                    <YupHoockForm
+                    {/* <YupHoockForm
+                        isOpen={isReactModalOpen}
+                        closeModal={() => setReactModalOpenH(false)}
+                    /> */}
+                    <ZodHoockForm
                         isOpen={isReactModalOpen}
                         closeModal={() => setReactModalOpenH(false)}
                     />

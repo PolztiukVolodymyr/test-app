@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { YupHookFormSchema } from "../../schemas/yupHookFormShema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { zodShema } from "../../schemas/zodHookFormShema";
 import styles from "./HookForm.module.scss";
 
-const YupHookForm = () => {
+const ZodHookForm = () => {
     const initialValues = {
         defaultValues: {
             username: "",
             email: "",
             comment: "",
         },
-        resolver: yupResolver(YupHookFormSchema),
+        resolver: zodResolver(zodShema),
     };
 
     const form = useForm(initialValues);
@@ -26,10 +26,9 @@ const YupHookForm = () => {
             reset();
         }
     }, [isSubmitSuccessful, reset]);
-
     return (
         <div>
-            <h2>Yup Hook Form</h2>
+            <h2>Zod Hook Form</h2>
 
             <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -64,4 +63,4 @@ const YupHookForm = () => {
     );
 };
 
-export default YupHookForm;
+export default ZodHookForm;
