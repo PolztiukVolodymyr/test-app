@@ -10,7 +10,8 @@ import FormikForm from "../components/FormikForm/FormikForm";
 // import HoockForm from "../components/HookForm/HookForm";
 // import YupHoockForm from "../components/HookForm/YupHookForm";
 import ZodHoockForm from "../components/HookForm/ZodHookForm";
-import styles from "./App.module.scss";
+import MiuLoginForm from "../components/Mui/MuiLoginForm";
+// import styles from "./App.module.scss";
 
 function App() {
     // const [modalActiveUL, setModalActiveUL] = useState(false);
@@ -36,10 +37,10 @@ function App() {
     }
 
     return (
-        <div className={styles.app}>
+        <div>
             <main>
                 <h3>Test app</h3>
-                <div className={styles.formWrap}>{/* <Form /> */}</div>
+                <div>{/* <Form /> */}</div>
 
                 {/* <button onClick={() => setModalActiveUL(true)}>ModalUlbi</button> */}
                 <button onClick={openModal}>Custom Modal</button>
@@ -69,6 +70,7 @@ function App() {
                     natus dolores ullam non, ut voluptatem repellat minima
                     quisquam deleniti commodi quos! Sapiente, esse quo?
                 </p>
+                <MiuLoginForm />
                 <p>
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                     Quam fugit illum minima. Architecto voluptatum debitis,
@@ -124,7 +126,7 @@ function App() {
                 onClose={() => setSipleModalOpen(false)}
             >
                 <h3>ModalTransition & DatePicker</h3>
-                <div className={styles.formWrap}>
+                <div>
                     <Form closeModal={() => setSipleModalOpen(false)} />
                 </div>
             </SimpleModal>
@@ -135,7 +137,7 @@ function App() {
                 <button onClick={() => setReactModalOpen(false)}>+</button>
                 <h3>ReactModal & FormikForm</h3>
 
-                <div className={styles.formWrap}>
+                <div>
                     <FormikForm
                         isOpen={isReactModalOpen}
                         closeModal={() => setReactModalOpen(false)}
@@ -149,7 +151,7 @@ function App() {
             >
                 <button onClick={() => setReactModalOpenH(false)}>+</button>
                 {/* <h3>ReactModal & HoockForm</h3> */}
-                <div className={styles.formWrap}>
+                <div>
                     {/* <HoockForm
                         isOpen={isReactModalOpen}
                         closeModal={() => setReactModalOpenH(false)}
@@ -171,7 +173,7 @@ function App() {
                     <button onClick={closeModal}>+</button>
                     <h4>Custom Modal & Custom Validation</h4>
                     {/* <SomeContent isOpen={modalActive} /> */}
-                    <div className={styles.formWrap}>
+                    <div>
                         <FormUp closeModal={closeModal} />
                     </div>
                 </ModalTest>
