@@ -7,11 +7,14 @@ import ReactModal from "../components/ReactModal/ReactModal";
 import Form from "../components/Form/Form";
 import FormUp from "../components/Form/FormUp";
 import FormikForm from "../components/FormikForm/FormikForm";
+
 // import HoockForm from "../components/HookForm/HookForm";
 // import YupHoockForm from "../components/HookForm/YupHookForm";
 import ZodHoockForm from "../components/HookForm/ZodHookForm";
 import MiuLoginForm from "../components/Mui/MuiLoginForm";
 // import styles from "./App.module.scss";
+
+// import { getDefaultUsersEmailFromApi } from "../helpers/fetchFakeApi";
 
 function App() {
     // const [modalActiveUL, setModalActiveUL] = useState(false);
@@ -21,6 +24,9 @@ function App() {
     const [isSipleModalOpen, setSipleModalOpen] = useState(false);
     const [isReactModalOpen, setReactModalOpen] = useState(false);
     const [isReactModalOpenH, setReactModalOpenH] = useState(false);
+
+    // const response = getDefaultUsersEmailFromApi();
+    // console.log("response:", response);
 
     function openModal() {
         setShouldRender(true);
