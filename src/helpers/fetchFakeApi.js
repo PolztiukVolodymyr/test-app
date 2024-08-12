@@ -17,10 +17,3 @@ export const isEmailExist = async (fieldValue) => {
     return data.length === 0 || "Email alredy exist"
 };
 
-// export const getNovaPoshtaData = async () => {
-//     const response = await fetch(
-//         'https://api.novaposhta.ua/v2.0/json/'
-//     );
-//     const data = await response.json();
-//     return data;
-// };
