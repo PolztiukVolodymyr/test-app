@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { TextField, Button, Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { YupNovaPoshtaSchema } from "../../schemas/yupNovaPoshtaShema";
 import { DevTool } from "@hookform/devtools";
 import { getNovaPoshtaData } from "../../services/novaPoshta";
 
@@ -10,6 +12,7 @@ const NovaPoshtaFindForm = () => {
             city: "",
             departmentsNumber: "",
         },
+        resolver: yupResolver(YupNovaPoshtaSchema),
     });
 
     const onSubmit = async (data) => {
@@ -20,7 +23,8 @@ const NovaPoshtaFindForm = () => {
             calledMethod: "getWarehouses",
             methodProperties: {
                 CityName: data.city,
-                Limit: data.departmentsNumber,
+                WarehouseId: data.departmentsNumber,
+                Limit: "50",
                 Language: "UA",
             },
         };
@@ -46,9 +50,7 @@ const NovaPoshtaFindForm = () => {
                         label='City'
                         type='text'
                         placeholder='Львів'
-                        {...register("city", {
-                            required: "City is required",
-                        })}
+                        {...register("city")}
                         error={!!errors.city}
                         helperText={errors.city?.message}
                     />
@@ -56,9 +58,7 @@ const NovaPoshtaFindForm = () => {
                         label='Number of departments'
                         type='text'
                         placeholder='10'
-                        {...register("departmentsNumber", {
-                            required: "Number of departments is required",
-                        })}
+                        {...register("departmentsNumber")}
                         error={!!errors.departmentsNumber}
                         helperText={errors.departmentsNumber?.message}
                     />
