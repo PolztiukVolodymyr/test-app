@@ -11,7 +11,7 @@ import FormikForm from "../components/FormikForm/FormikForm";
 // import HoockForm from "../components/HookForm/HookForm";
 // import YupHoockForm from "../components/HookForm/YupHookForm";
 import ZodHoockForm from "../components/HookForm/ZodHookForm";
-import NovaPoshtaFindForm from "../components/Mui/NovaPoshtaFindForm";
+import NovaPoshta from "../components/NovaPoshta/NovaPoshta";
 // import styles from "./App.module.scss";
 
 // import { getDefaultUsersEmailFromApi } from "../helpers/fetchFakeApi";
@@ -76,7 +76,7 @@ function App() {
                     natus dolores ullam non, ut voluptatem repellat minima
                     quisquam deleniti commodi quos! Sapiente, esse quo?
                 </p>
-                <NovaPoshtaFindForm />
+                <NovaPoshta />
                 <p>
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                     Quam fugit illum minima. Architecto voluptatum debitis,

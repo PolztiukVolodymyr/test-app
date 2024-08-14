@@ -8,5 +8,8 @@ export const YupNovaPoshtaSchema = yup.object({
             'Підтримується пошук тільки українською мовою...'
         )
         .required(`"Назва" міста є обов'язкова`),
-    departmentsNumber: yup.number('Введіть номер відділення...'),
+    departmentNumber: yup
+        .string('Введіть номер відділення...')
+        .nullable(true)
+        .transform((value, origin) => origin === '' ? null : value),
 });
