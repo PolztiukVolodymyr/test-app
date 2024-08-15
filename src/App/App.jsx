@@ -43,7 +43,7 @@ function App() {
     }
 
     return (
-        <div>
+        <>
             <main>
                 <h3>Test app</h3>
                 <div>{/* <Form /> */}</div>
@@ -77,55 +77,6 @@ function App() {
                     quisquam deleniti commodi quos! Sapiente, esse quo?
                 </p>
                 <NovaPoshta />
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Quam fugit illum minima. Architecto voluptatum debitis,
-                    natus dolores ullam non, ut voluptatem repellat minima
-                    quisquam deleniti commodi quos! Sapiente, esse quo?
-                </p>
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Quam fugit illum minima. Architecto voluptatum debitis,
-                    natus dolores ullam non, ut voluptatem repellat minima
-                    quisquam deleniti commodi quos! Sapiente, esse quo?
-                </p>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quo, dolorum dolore vero eligendi cum iusto ea quam
-                    perspiciatis veritatis rem cupiditate a in, aliquam
-                    pariatur.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quo, dolorum dolore vero eligendi cum iusto ea quam
-                    perspiciatis veritatis rem cupiditate a in, aliquam
-                    pariatur.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quo, dolorum dolore vero eligendi cum iusto ea quam
-                    perspiciatis veritatis rem cupiditate a in, aliquam
-                    pariatur.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quo, dolorum dolore vero eligendi cum iusto ea quam
-                    perspiciatis veritatis rem cupiditate a in, aliquam
-                    pariatur.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quo, dolorum dolore vero eligendi cum iusto ea quam
-                    perspiciatis veritatis rem cupiditate a in, aliquam
-                    pariatur.
-                </p>
-
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quo, dolorum dolore vero eligendi cum iusto ea quam
-                    perspiciatis veritatis rem cupiditate a in, aliquam
-                    pariatur.
-                </p>
             </main>
             <SimpleModal
                 isOpen={isSipleModalOpen}
@@ -184,7 +135,7 @@ function App() {
                     </div>
                 </ModalTest>
             )}
-        </div>
+        </>
     );
 }
 

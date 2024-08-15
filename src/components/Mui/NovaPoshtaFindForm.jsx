@@ -48,7 +48,7 @@ const NovaPoshtaFindForm = ({ setNovaPostaData }) => {
             <form noValidate onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing={2} width={400}>
                     <TextField
-                        label='City'
+                        label='Місто'
                         type='text'
                         placeholder='Львів'
                         {...register("city")}
@@ -56,7 +56,7 @@ const NovaPoshtaFindForm = ({ setNovaPostaData }) => {
                         helperText={errors.city?.message}
                     />
                     <TextField
-                        label='Department number'
+                        label='Номер відділення'
                         type='text'
                         placeholder='10'
                         {...register("departmentNumber")}
