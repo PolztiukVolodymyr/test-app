@@ -1,21 +1,25 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { DevTool } from "@hookform/devtools";
 import { zodShema } from "../../schemas/zodHookFormShema";
 import styles from "./HookForm.module.scss";
+
+const petsArr = ["cat", "dog"];
 
 const ZodHookForm = () => {
     const initialValues = {
         defaultValues: {
             username: "",
             email: "",
-            comment: "",
+            channel: "",
         },
-        resolver: zodResolver(zodShema),
+        resolver: zodResolver(zodShema(petsArr)),
+        // context: contextArr,
     };
 
     const form = useForm(initialValues);
-    const { register, handleSubmit, formState, reset } = form;
+    const { register, handleSubmit, formState, reset, control } = form;
     const { errors, isSubmitSuccessful } = formState;
 
     const onSubmit = (data) => {
@@ -52,13 +56,14 @@ const ZodHookForm = () => {
                 </div>
 
                 <div className={styles.wrapInput}>
-                    <label htmlFor='comment'>Channel</label>
-                    <input type='text' id='comment' {...register("comment")} />
-                    <p className={styles.error}>{errors.comment?.message}</p>
+                    <label htmlFor='channel'>Channel</label>
+                    <input type='text' id='channel' {...register("channel")} />
+                    <p className={styles.error}>{errors.channel?.message}</p>
                 </div>
 
                 <button>Submit</button>
             </form>
+            <DevTool control={control} />
         </div>
     );
 };

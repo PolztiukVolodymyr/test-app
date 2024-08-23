@@ -5,8 +5,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { YupNovaPoshtaSchema } from "../../schemas/yupNovaPoshtaShema";
 import { DevTool } from "@hookform/devtools";
 import { getNovaPoshtaData } from "../../services/novaPoshta";
+import { setNovaPostBodyValues } from "../../helpers/setNovaPoshtaBodyValues";
 
-const NovaPoshtaFindForm = ({ setNovaPostaData }) => {
+const NovaPoshtaFindForm = ({
+    setNovaPostaData,
+    pageNumber,
+    setPageNumber,
+    city,
+    setCity,
+    setDepartmentNumber,
+}) => {
     const form = useForm({
         defaultValues: {
             city: "",
@@ -16,22 +24,24 @@ const NovaPoshtaFindForm = ({ setNovaPostaData }) => {
     });
 
     const onSubmit = async (data) => {
-        // console.log("Form submited", data);
-        const body = {
-            apiKey: "8d677609f6e47ce83929374b3afab572",
-            modelName: "AddressGeneral",
-            calledMethod: "getWarehouses",
-            methodProperties: {
-                CityName: data.city,
-                Page: "1",
-                Limit: "50",
-                Language: "UA",
-                WarehouseId: data.departmentNumber,
-            },
-        };
+        setCity(data.city);
+        setDepartmentNumber(data.departmentNumber);
+
+        if (data.city !== city) {
+            setPageNumber("1");
+        }
+
+        const body = setNovaPostBodyValues(
+            data.city,
+            pageNumber,
+            data.departmentNumber
+        );
+
         const result = await getNovaPoshtaData(body);
         setNovaPostaData(result);
         // console.log("result:", result);
+        console.log("PropsCity", city);
+        console.log("data.city", data.city);
     };
 
     const { register, handleSubmit, formState, control, reset } = form;

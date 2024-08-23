@@ -11,7 +11,7 @@ import FormikForm from "../components/FormikForm/FormikForm";
 // import HoockForm from "../components/HookForm/HookForm";
 // import YupHoockForm from "../components/HookForm/YupHookForm";
 import ZodHoockForm from "../components/HookForm/ZodHookForm";
-import NovaPoshta from "../components/NovaPoshta/NovaPoshta";
+import NovaPoshta from "../components/NovaPoshtaMui/NovaPoshta";
 // import styles from "./App.module.scss";
 
 // import { getDefaultUsersEmailFromApi } from "../helpers/fetchFakeApi";
@@ -67,7 +67,7 @@ function App() {
                     className='modal-show-button'
                     onClick={() => setReactModalOpenH(true)}
                 >
-                    R_Modal & HookForm
+                    R_Modal & ZodHookForm
                 </button>
 
                 <p>
