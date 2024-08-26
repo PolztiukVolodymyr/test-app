@@ -16,8 +16,6 @@ const PaginationComponent = ({
     // console.log("pageNumberPagination:", pageNumber);
     const [numberOfPages, setNumberOfPages] = useState(0);
 
-    // console.log("numberOfPages:", numberOfPages);
-
     useEffect(() => {
         if (info) {
             const { totalCount } = info;
@@ -26,13 +24,10 @@ const PaginationComponent = ({
     }, [info]);
 
     const handlePageChange = async (event, value) => {
-        // console.log("value:", value);
-        setPageNumber(value);
-
+        setPageNumber(String(value));
         const body = setNovaPostBodyValues(city, value, departmentNumber);
         const result = await getNovaPoshtaData(body);
-
-        await setNovaPostaData(result);
+        setNovaPostaData(result);
     };
 
     if (numberOfPages < 2) {

@@ -23,27 +23,6 @@ const NovaPoshtaFindForm = ({
         resolver: yupResolver(YupNovaPoshtaSchema),
     });
 
-    const onSubmit = async (data) => {
-        setCity(data.city);
-        setDepartmentNumber(data.departmentNumber);
-
-        if (data.city !== city) {
-            setPageNumber("1");
-        }
-
-        const body = setNovaPostBodyValues(
-            data.city,
-            pageNumber,
-            data.departmentNumber
-        );
-
-        const result = await getNovaPoshtaData(body);
-        setNovaPostaData(result);
-        // console.log("result:", result);
-        console.log("PropsCity", city);
-        console.log("data.city", data.city);
-    };
-
     const { register, handleSubmit, formState, control, reset } = form;
     const { errors, isSubmitSuccessful } = formState;
 
@@ -52,6 +31,34 @@ const NovaPoshtaFindForm = ({
             reset();
         }
     }, [isSubmitSuccessful, reset]);
+
+    // useEffect(() => {
+    //     if (data.city !== city) {
+    //         setPageNumber("1");
+    //     }
+    // }, [city, setPageNumber]);
+
+    const onSubmit = async (data) => {
+        setCity(data.city);
+        setDepartmentNumber(data.departmentNumber);
+        let intermediateValue;
+
+        if (data.city !== city) {
+            setPageNumber("1");
+            intermediateValue = "1";
+        } else {
+            intermediateValue = pageNumber;
+        }
+
+        const body = setNovaPostBodyValues(
+            data.city,
+            intermediateValue,
+            data.departmentNumber
+        );
+
+        const result = await getNovaPoshtaData(body);
+        setNovaPostaData(result);
+    };
 
     return (
         <>

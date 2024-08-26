@@ -10,7 +10,7 @@ const NovaPoshta = () => {
     const [departmentNumber, setDepartmentNumber] = useState("");
 
     // console.log("novaPostaData:", novaPostaData);
-    // console.log("pageNumberNovaPoshta:", pageNumber);
+    // console.log("pageNumberMAIN:", pageNumber);
 
     return (
         <>
