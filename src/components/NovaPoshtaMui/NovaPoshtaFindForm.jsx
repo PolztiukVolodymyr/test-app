@@ -1,17 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { TextField, Button, Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { YupNovaPoshtaSchema } from "../../schemas/yupNovaPoshtaShema";
 import { DevTool } from "@hookform/devtools";
+import { YupNovaPoshtaSchema } from "../../schemas/yupNovaPoshtaShema";
 import { getNovaPoshtaData } from "../../services/novaPoshta";
 import { setNovaPostBodyValues } from "../../helpers/setNovaPoshtaBodyValues";
 
 const NovaPoshtaFindForm = ({
-    setNovaPostaData,
-    pageNumber,
-    setPageNumber,
     city,
+    pageNumber,
+    departmentNumber,
+    setPageNumber,
+    setNovaPostaData,
     setCity,
     setDepartmentNumber,
 }) => {
@@ -32,27 +33,54 @@ const NovaPoshtaFindForm = ({
         }
     }, [isSubmitSuccessful, reset]);
 
-    // useEffect(() => {
+    // onSubmit with useEffect
+    // we also have to use useState (to prevent the first fetch)
+
+    // const [didMount, setDidMount] = useState(false);
+
+    // const onSubmit = (data) => {
+    //     setCity(data.city);
+    //     setDepartmentNumber(data.departmentNumber);
+    //     setDidMount(true);
+
     //     if (data.city !== city) {
     //         setPageNumber("1");
     //     }
-    // }, [city, setPageNumber]);
+    // };
+
+    // useEffect(() => {
+    //     if (didMount) {
+    //         async function fetchData() {
+    //             const body = setNovaPostBodyValues(
+    //                 city,
+    //                 Number(pageNumber),
+    //                 departmentNumber
+    //             );
+
+    //             const result = await getNovaPoshtaData(body);
+    //             setNovaPostaData(result);
+    //         }
+    //         fetchData();
+    //     }
+    // }, [city, pageNumber, departmentNumber, setNovaPostaData, didMount]);
+
+    // onSubmit without useEffect and useState by using interim value
 
     const onSubmit = async (data) => {
         setCity(data.city);
         setDepartmentNumber(data.departmentNumber);
-        let intermediateValue;
+        let interimValue;
 
         if (data.city !== city) {
             setPageNumber("1");
-            intermediateValue = "1";
+            interimValue = "1";
         } else {
-            intermediateValue = pageNumber;
+            interimValue = pageNumber;
         }
 
         const body = setNovaPostBodyValues(
             data.city,
-            intermediateValue,
+            interimValue,
             data.departmentNumber
         );
 

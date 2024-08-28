@@ -19,6 +19,7 @@ const NovaPoshta = () => {
                 setNovaPostaData={setNovaPostaData}
                 city={city}
                 setCity={setCity}
+                departmentNumber={departmentNumber}
                 setDepartmentNumber={setDepartmentNumber}
                 pageNumber={pageNumber}
                 setPageNumber={setPageNumber}
