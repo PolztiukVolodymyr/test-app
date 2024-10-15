@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import NovaPoshtaFindForm from "./NovaPoshtaFindForm";
 import DepartmentsList from "./DepartmentsList";
 import PaginationComponent from "./PaginationComponent";
 
-const NovaPoshta = () => {
+const NovaPoshtaFinder = () => {
     const [novaPostaData, setNovaPostaData] = useState({});
     const [pageNumber, setPageNumber] = useState("1");
     const [city, setCity] = useState("");
@@ -14,6 +15,8 @@ const NovaPoshta = () => {
 
     return (
         <>
+            <NavLink to='/'>Home</NavLink>
+
             <h2>Find Nova Poshta departments (Mui components)</h2>
             <NovaPoshtaFindForm
                 setNovaPostaData={setNovaPostaData}
@@ -37,4 +40,4 @@ const NovaPoshta = () => {
     );
 };
 
-export default NovaPoshta;
+export default NovaPoshtaFinder;

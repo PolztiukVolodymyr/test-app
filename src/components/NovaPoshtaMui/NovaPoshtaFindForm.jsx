@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { TextField, Button, Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,6 +6,8 @@ import { DevTool } from "@hookform/devtools";
 import { YupNovaPoshtaSchema } from "../../schemas/yupNovaPoshtaShema";
 import { getNovaPoshtaData } from "../../services/novaPoshta";
 import { setNovaPostBodyValues } from "../../helpers/setNovaPoshtaBodyValues";
+
+import styles from "./Novapost.module.scss";
 
 const NovaPoshtaFindForm = ({
     city,
@@ -90,7 +92,11 @@ const NovaPoshtaFindForm = ({
 
     return (
         <>
-            <form noValidate onSubmit={handleSubmit(onSubmit)}>
+            <form
+                className={styles.form}
+                noValidate
+                onSubmit={handleSubmit(onSubmit)}
+            >
                 <Stack spacing={2} width={400}>
                     <TextField
                         label='Місто'
