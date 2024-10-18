@@ -2,13 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 // import { regionData } from "../../data/regionData";
-import { getRegionsArray } from "../../helpers/getRegionsNovapost";
+import {
+    getRegionsArray,
+    getSettlementById,
+} from "../../helpers/getRegionsNovapost";
 import { YupNovapostBlockSchema } from "../../schemas/yupNovapostBlockSchema";
+import ReactDatePicker from "react-datepicker";
 
 import styles from "./Novapost.module.scss";
+import "react-datepicker/dist/react-datepicker.css";
 
 const NovaPostBlock = () => {
     const initialValues = {
@@ -16,17 +22,31 @@ const NovaPostBlock = () => {
             name: "",
             email: "",
             region: "",
+            settlement: "",
+            datepicker: "",
         },
         resolver: yupResolver(YupNovapostBlockSchema),
         mode: "onChange",
     };
 
     const form = useForm(initialValues);
-    const { register, handleSubmit, formState, reset } = form;
+    const {
+        register,
+        handleSubmit,
+        formState,
+        reset,
+        control,
+        getValues,
+        setValue,
+    } = form;
     const { errors, isSubmitSuccessful, isValid, isSubmitting, isSubmitted } =
         formState;
 
     const [regions, setRegions] = useState([]);
+    const [settlements, setSettlements] = useState([]);
+
+    // console.log("errors: ", errors);
+    // console.log("currentRegion: ", getValues("region"));
 
     useEffect(() => {
         if (isSubmitSuccessful) {
@@ -46,10 +66,23 @@ const NovaPostBlock = () => {
         console.log("NovapostBlockFormData:", data);
     };
 
+    const onRegionChange = async (event) => {
+        setSettlements([]);
+        // console.log("event.target.value:", event.target.value);
+        let currentRegionId = regions.find(
+            (el) => el.description === event.target.value
+        ).id;
+        setValue("region", event.target.value, { shouldValidate: true });
+        // console.log("currentRegionId:", currentRegionId);
+        const response = await getSettlementById(currentRegionId);
+        setSettlements(response);
+
+        // console.log("responseSettles:", response);
+    };
+
     return (
         <>
             <NavLink to='/'>Home</NavLink>
-
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className={styles.formBlock}
@@ -84,12 +117,47 @@ const NovaPostBlock = () => {
                         <p className={styles.error}>{errors.region?.message}</p>
                         <select
                             {...register("region")}
-                            className={`${styles.input} ${styles.selectTitle}`}
+                            onChange={onRegionChange}
+                            className={
+                                getValues("region")
+                                    ? styles.input
+                                    : `${styles.input} ${styles.selectNottouched}`
+                            }
                         >
-                            <option value='' disabled defaultValue>
+                            <option value='' disabled defaultValue hidden>
                                 Область
                             </option>
                             {regions?.map((el, index) => {
+                                return (
+                                    <option
+                                        key={index}
+                                        value={el.description}
+                                        className={styles.input}
+                                    >
+                                        {el.description}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                    </div>
+                    <div className={styles.inputWrap}>
+                        <p className={styles.error}>
+                            {errors.settlement?.message}
+                        </p>
+                        <select
+                            {...register("settlement")}
+                            // onChange={onRegionChange}
+                            className={
+                                getValues("settlement")
+                                    ? styles.input
+                                    : `${styles.input} ${styles.selectNottouched}`
+                            }
+                        >
+                            <option value='' disabled defaultValue>
+                                Населений пункт
+                            </option>
+
+                            {settlements?.map((el, index) => {
                                 return (
                                     <option
                                         key={index}
@@ -101,6 +169,27 @@ const NovaPostBlock = () => {
                                 );
                             })}
                         </select>
+                    </div>
+                    <div className={styles.inputWrap}>
+                        <p className={styles.error}>
+                            {errors.datepicker?.message}
+                        </p>
+                        <Controller
+                            control={control}
+                            name='datepicker'
+                            render={({
+                                field: { onChange, onBlur, value, ref },
+                            }) => (
+                                <ReactDatePicker
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                    selected={value}
+                                    className={styles.dataPicker}
+                                    placeholderText='Виберіть дату'
+                                    dateFormat='dd.MM.yyyy'
+                                />
+                            )}
+                        />
                     </div>
                 </div>
                 <button
@@ -115,6 +204,7 @@ const NovaPostBlock = () => {
                     Відправити
                 </button>
             </form>
+            <DevTool control={control} />
         </>
     );
 };

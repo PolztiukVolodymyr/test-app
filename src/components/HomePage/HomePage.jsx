@@ -51,6 +51,9 @@ const HomePage = () => {
             <NavLink to='novapostBlock' className={styles.nav}>
                 Nova Post Block
             </NavLink>
+            <NavLink to='customSelect' className={styles.nav}>
+                Custom Select
+            </NavLink>
             <main>
                 <h3>Home Page</h3>
                 <div>{/* <Form /> */}</div>

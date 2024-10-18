@@ -7,5 +7,6 @@ export const YupNovapostBlockSchema = yup.object({
         .email("Email format is not valid")
         .required("Email is required"),
     region: yup.string().required("Region is required"),
-
+    settlement: yup.string().required("Settlement is required"),
+    datepicker: yup.string().required("Datepicker is required"),
 });

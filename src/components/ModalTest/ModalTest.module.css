@@ -1,0 +1,46 @@
+.backdrop {
+  position: fixed;
+  top: 0rem;
+  left: 0rem;
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.backdrop.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  width: 400px;
+  height: 500px;
+  opacity: 0;
+  -webkit-transform: translateX(100vw);
+          transform: translateX(100vw);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.modalContent.activeContent {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+/*# sourceMappingURL=ModalTest.module.css.map */
