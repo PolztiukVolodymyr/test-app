@@ -30,6 +30,9 @@
     align-items: center;
     row-gap: 5px;
     width: 100%;
+    // border: 1px solid black;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px 0px rgba(75, 75, 78, 0.5);
 }
 
 .option {
@@ -38,5 +41,6 @@
 }
 
 .option:hover {
-    background-color: grey;
+    background-color: lightgrey;
+    border-radius: 5px;
 }

@@ -54,6 +54,9 @@ const HomePage = () => {
             <NavLink to='customSelect' className={styles.nav}>
                 Custom Select
             </NavLink>
+            <NavLink to='custom' className={styles.nav}>
+                Custom
+            </NavLink>
             <main>
                 <h3>Home Page</h3>
                 <div>{/* <Form /> */}</div>
