@@ -24,23 +24,31 @@
     color: black;
 }
 
-.optionsBox {
+.optionsList {
     display: flex;
     flex-direction: column;
     align-items: center;
+    list-style: none;
     row-gap: 5px;
+    padding: 20px 0 20px 0;
     width: 100%;
-    // border: 1px solid black;
+    max-height: 500px;
+    overflow-x: hidden;
     border-radius: 8px;
     box-shadow: 2px 2px 4px 0px rgba(75, 75, 78, 0.5);
 }
 
-.option {
+.optionItem {
     width: 100%;
     text-align: center;
 }
 
-.option:hover {
+.optionItem:hover {
     background-color: lightgrey;
     border-radius: 5px;
+}
+
+.buttonMore {
+    margin-top: 20px;
+    border-radius: 4px;
 }

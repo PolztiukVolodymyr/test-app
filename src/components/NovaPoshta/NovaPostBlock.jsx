@@ -115,6 +115,7 @@ const NovaPostBlock = () => {
                     </div>
                     <div className={styles.inputWrap}>
                         <p className={styles.error}>{errors.region?.message}</p>
+
                         <select
                             {...register("region")}
                             onChange={onRegionChange}
