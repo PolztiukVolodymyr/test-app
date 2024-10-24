@@ -5,19 +5,19 @@ import styles from "./CustomSelect.module.scss";
 
 // const optionsSecond = ["four", "five", "six", "seven"];
 
-const CustomSelect = ({ value, setValue }) => {
+const CustomSelect = ({ value, setValue, isDropdownOpen, setDropdownOpen }) => {
     // const [options, setOptions] = useState(["one", "two", "three"]);
-    const [isOpen, setOpen] = useState(false);
+
     const [regions, setRegions] = useState([]);
 
     const wrapRef = useRef(); // Reference to the custom select element
-    const itemRef = useRef(); // Reference to the custom select element
+    const itemRef = useRef();
 
-    const toggling = () => setOpen(!isOpen);
+    const toggling = () => setDropdownOpen(!isDropdownOpen);
 
     const onOptionClick = (value) => {
         setValue(value.target.innerText);
-        setOpen(false);
+        setDropdownOpen(false);
         //
         // console.log("text:", wrapRef.current.innerText);
     };
@@ -39,7 +39,7 @@ const CustomSelect = ({ value, setValue }) => {
     useEffect(() => {
         const handler = (e) => {
             if (wrapRef.current && !wrapRef.current.contains(e.target)) {
-                setOpen(false);
+                setDropdownOpen(false);
             }
         };
 
@@ -51,12 +51,11 @@ const CustomSelect = ({ value, setValue }) => {
 
     return (
         <>
-            <h4>Custom Select Component</h4>
             <div className={styles.wrapper} ref={wrapRef}>
                 <div onClick={toggling} className={styles.titleBox}>
                     {value || "Select option"}
                 </div>
-                {isOpen && (
+                {isDropdownOpen && (
                     <ul className={styles.optionsList}>
                         {regions?.map((option, index) => (
                             <li

@@ -13,6 +13,7 @@ import styles from "./ControlForm.module.scss";
 const ControlForm = () => {
     const initialValues = {
         defaultValues: {
+            name: "",
             region: "",
         },
         resolver: yupResolver(YupCustomFormSchema),
@@ -20,15 +21,8 @@ const ControlForm = () => {
     };
 
     const form = useForm(initialValues);
-    const {
-        register,
-        handleSubmit,
-        formState,
-        reset,
-        control,
-        getValues,
-        setValue,
-    } = form;
+    const { handleSubmit, formState, register, reset, control, setValue } =
+        form;
     const { errors, isSubmitSuccessful, isValid, isSubmitting, isSubmitted } =
         formState;
 
@@ -37,25 +31,28 @@ const ControlForm = () => {
         name: "region",
     });
 
-    console.log("field:", field);
-    console.log("field.value:", field.value);
+    const [regionValue, setRegionValue] = useState(field.value);
+    const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-    const [regionValue, setRegionValue] = useState(null);
-    console.log("regionValue:", regionValue);
+    useEffect(() => {
+        setValue("region", regionValue, { shouldValidate: true });
+    }, [regionValue, setValue]);
 
     useEffect(() => {
         if (isSubmitSuccessful) {
             reset();
+            setValue("region", "");
+            setRegionValue("");
         }
-    }, [isSubmitSuccessful, reset]);
+    }, [isSubmitSuccessful, reset, setValue]);
 
     const onSubmit = (data) => {
         console.log("ControlFormData:", data);
     };
-    // console.log("errors", errors);
 
     return (
         <>
+            <h4>Custom SelectComponent inside react-hook-form</h4>
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className={styles.formBlock}
@@ -63,24 +60,41 @@ const ControlForm = () => {
             >
                 <div className={styles.wrapper}>
                     <div className={styles.inputWrap}>
-                        <p className={styles.error}>{errors.region?.message}</p>
+                        <p className={styles.error}>{errors.name?.message}</p>
+                        <input
+                            type='text'
+                            {...register("name")}
+                            placeholder='Name'
+                            maxLength='30'
+                            autoComplete='off'
+                            className={styles.input}
+                        />
+                    </div>
+                    <div className={styles.inputWrap}>
+                        <p className={styles.error}>
+                            {isSubmitted && errors.region?.message}
+                        </p>
                         <CustomSelect
                             value={regionValue}
                             setValue={setRegionValue}
+                            isDropdownOpen={isDropdownOpen}
+                            setDropdownOpen={setDropdownOpen}
                         />
                     </div>
                 </div>
-                <button
-                    type='submit'
-                    disabled={isSubmitting}
-                    className={
-                        !isSubmitted || (isValid && isSubmitted)
-                            ? `${styles.submitButton} ${styles.activeBtn}`
-                            : styles.submitButton
-                    }
-                >
-                    Відправити
-                </button>
+                {!isDropdownOpen && (
+                    <button
+                        type='submit'
+                        disabled={isSubmitting}
+                        className={
+                            !isSubmitted || (isValid && isSubmitted)
+                                ? `${styles.submitButton} ${styles.activeBtn}`
+                                : styles.submitButton
+                        }
+                    >
+                        Відправити
+                    </button>
+                )}
             </form>
             <DevTool control={control} />
         </>
