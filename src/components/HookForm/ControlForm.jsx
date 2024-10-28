@@ -2,18 +2,21 @@
 
 import { useEffect, useState } from "react";
 
-import { useForm, useController } from "react-hook-form";
+import { useForm, Controller, useController } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { YupCustomFormSchema } from "../../schemas/yupCustomFormShema";
 import CustomSelect from "../CustomComponents/CustomSelect";
+import ReactDatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
 import styles from "./ControlForm.module.scss";
 
 const ControlForm = () => {
     const initialValues = {
         defaultValues: {
             name: "",
+            datepicker: "",
             region: "",
         },
         resolver: yupResolver(YupCustomFormSchema),
@@ -52,7 +55,10 @@ const ControlForm = () => {
 
     return (
         <>
-            <h4>Custom SelectComponent inside react-hook-form</h4>
+            <h4>
+                Custom SelectComponent and ReactDatePicker inside
+                react-hook-form
+            </h4>
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className={styles.formBlock}
@@ -68,6 +74,27 @@ const ControlForm = () => {
                             maxLength='30'
                             autoComplete='off'
                             className={styles.input}
+                        />
+                    </div>
+                    <div className={styles.inputWrap}>
+                        <p className={styles.error}>
+                            {errors.datepicker?.message}
+                        </p>
+                        <Controller
+                            control={control}
+                            name='datepicker'
+                            render={({
+                                field: { onChange, onBlur, value, ref },
+                            }) => (
+                                <ReactDatePicker
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                    selected={value}
+                                    className={styles.dataPicker}
+                                    placeholderText='Виберіть дату'
+                                    dateFormat='dd.MM.yyyy'
+                                />
+                            )}
                         />
                     </div>
                     <div className={styles.inputWrap}>
