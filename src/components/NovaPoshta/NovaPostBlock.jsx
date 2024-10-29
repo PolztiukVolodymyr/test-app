@@ -7,6 +7,7 @@ import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 // import { regionData } from "../../data/regionData";
 import {
+    getCityDepartmentsByCityName,
     getCityDepartmentsByString,
     getSettlementByString,
 } from "../../helpers/getRegionsNovapost";
@@ -15,6 +16,10 @@ import { YupNovapostBlockSchema } from "../../schemas/yupNovapostBlockSchema";
 import styles from "./Novapost.module.scss";
 
 const NovaPostBlock = () => {
+    const [cities, setCities] = useState([]);
+    const [departments, setDepartments] = useState([]);
+    const [currentCity, setCurrentCity] = useState("");
+
     const initialValues = {
         defaultValues: {
             name: "",
@@ -23,28 +28,18 @@ const NovaPostBlock = () => {
             department: "",
         },
         resolver: yupResolver(YupNovapostBlockSchema),
+        context: { cities, departments },
         mode: "onChange",
     };
 
     const form = useForm(initialValues);
-    const {
-        register,
-        handleSubmit,
-        formState,
-        reset,
-        control,
-        getValues,
-        setValue,
-    } = form;
+    const { register, handleSubmit, formState, reset, control, setValue } =
+        form;
     const { errors, isSubmitSuccessful, isValid, isSubmitting, isSubmitted } =
         formState;
 
-    // const [regions, setRegions] = useState([]);
-    const [departments, setDepartments] = useState([]);
-    const [cities, setCities] = useState([]);
-
     // console.log("errors: ", errors);
-    // console.log("currentRegion: ", getValues("region"));
+    // console.log("currentCity: ", currentCity);
 
     useEffect(() => {
         if (isSubmitSuccessful) {
@@ -52,15 +47,22 @@ const NovaPostBlock = () => {
         }
     }, [isSubmitSuccessful, reset]);
 
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const arr = await getRegionsArray();
-    //         setRegions(arr);
-    //     }
-    //     fetchData();
-    // }, []);
+    useEffect(() => {
+        if (!currentCity) return;
+        async function fetchData() {
+            const currentDepartments = await getCityDepartmentsByCityName(
+                currentCity
+            );
+            setDepartments(currentDepartments);
+        }
+        fetchData();
+    }, [currentCity]);
 
     const onSubmit = (data) => {
+        setCurrentCity("");
+        setCities([]);
+        setDepartments([]);
+
         console.log("NovapostBlockFormData:", data);
     };
 
@@ -68,12 +70,13 @@ const NovaPostBlock = () => {
         const response = await getSettlementByString(event.target.value);
         setCities(response);
         setValue("city", event.target.value, { shouldValidate: true });
+        setCurrentCity(event.target.value);
 
         // console.log("Response:", response);
     };
 
     const onDepartsmentChange = async (event) => {
-        const currentCity = getValues("city");
+        // const currentCity = getValues("city");
 
         const response = await getCityDepartmentsByString(
             currentCity,
@@ -86,7 +89,8 @@ const NovaPostBlock = () => {
         // console.log("ResponseDepartments:", response);
     };
 
-    console.log("departments:", departments);
+    // console.log("cities:", cities);
+    // console.log("departments:", departments);
 
     return (
         <>

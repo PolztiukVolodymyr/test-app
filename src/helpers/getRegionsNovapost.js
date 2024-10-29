@@ -85,3 +85,14 @@ export async function getCityDepartmentsByCityName(cityName) {
 }
 
 // calledMethod: "getSettlementsref"
+
+
+// {
+//     "apiKey": "8d677609f6e47ce83929374b3afab572",
+//         "modelName": "AddressGeneral",
+//             "calledMethod": "getWarehouses",
+//                 "methodProperties": {
+//         "CityName": "луцьк",
+//             "Limit": "20"
+//     }
+// }
