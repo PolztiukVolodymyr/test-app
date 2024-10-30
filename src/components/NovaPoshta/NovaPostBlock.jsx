@@ -5,13 +5,12 @@ import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
-// import { regionData } from "../../data/regionData";
+import { YupNovapostBlockSchema } from "../../schemas/yupNovapostBlockSchema";
 import {
     getCityDepartmentsByCityName,
     getCityDepartmentsByString,
     getSettlementByString,
 } from "../../helpers/getRegionsNovapost";
-import { YupNovapostBlockSchema } from "../../schemas/yupNovapostBlockSchema";
 
 import styles from "./Novapost.module.scss";
 
@@ -33,22 +32,34 @@ const NovaPostBlock = () => {
     };
 
     const form = useForm(initialValues);
-    const { register, handleSubmit, formState, reset, control, setValue } =
-        form;
+    const {
+        register,
+        handleSubmit,
+        formState,
+        reset,
+        control,
+        setValue,
+        getValues,
+    } = form;
     const { errors, isSubmitSuccessful, isValid, isSubmitting, isSubmitted } =
         formState;
 
     // console.log("errors: ", errors);
     // console.log("currentCity: ", currentCity);
+    // console.log("getValues(city): ", getValues("city"));
 
     useEffect(() => {
         if (isSubmitSuccessful) {
             reset();
+            setCurrentCity("");
+            setCities([]);
+            setDepartments([]);
         }
     }, [isSubmitSuccessful, reset]);
 
     useEffect(() => {
         if (!currentCity) return;
+        if (currentCity.length < 2) return;
         async function fetchData() {
             const currentDepartments = await getCityDepartmentsByCityName(
                 currentCity
@@ -59,18 +70,18 @@ const NovaPostBlock = () => {
     }, [currentCity]);
 
     const onSubmit = (data) => {
-        setCurrentCity("");
-        setCities([]);
-        setDepartments([]);
-
         console.log("NovapostBlockFormData:", data);
     };
 
     const onCityNameChange = async (event) => {
-        const response = await getSettlementByString(event.target.value);
-        setCities(response);
+        setDepartments([]);
+        setValue("department", "");
         setValue("city", event.target.value, { shouldValidate: true });
         setCurrentCity(event.target.value);
+
+        if (event.target.value.length < 2) return;
+        const response = await getSettlementByString(event.target.value);
+        setCities(response);
 
         // console.log("Response:", response);
     };
