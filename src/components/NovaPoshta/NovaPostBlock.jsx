@@ -32,15 +32,8 @@ const NovaPostBlock = () => {
     };
 
     const form = useForm(initialValues);
-    const {
-        register,
-        handleSubmit,
-        formState,
-        reset,
-        control,
-        setValue,
-        getValues,
-    } = form;
+    const { register, handleSubmit, formState, reset, control, setValue } =
+        form;
     const { errors, isSubmitSuccessful, isValid, isSubmitting, isSubmitted } =
         formState;
 
