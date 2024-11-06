@@ -22,8 +22,8 @@ export const YupNovapostBlockSchema = yup.object({
             name: "city",
             test(value, ctx) {
                 // console.log('ValidationValue:', value)
-                const notExist = this.options.context.cities.length === 0;
-                if (notExist) {
+                const cityExist = this.options.context?.cities.includes(value);
+                if (!cityExist) {
                     return ctx.createError({
                         message: "Виберіть місто зі списку"
                     })
@@ -37,8 +37,8 @@ export const YupNovapostBlockSchema = yup.object({
         .test({
             name: "department",
             test(value, ctx) {
-                const notExist = this.options.context.departments.length === 0;
-                if (notExist) {
+                const departmentExist = this.options.context?.departments.includes(value);
+                if (!departmentExist) {
                     return ctx.createError({
                         message: "Такого відділення немає"
                     })
