@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 
 import { useForm, Controller, useController } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
+import ReactDatePicker from "react-datepicker";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { YupCustomFormSchema } from "../../schemas/yupCustomFormShema";
 import CustomSelect from "../CustomComponents/CustomSelect";
-import ReactDatePicker from "react-datepicker";
+import { getLocaleCalendar } from "../../helpers/getLocaleCalendar";
 
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./ControlForm.module.scss";
@@ -17,6 +18,7 @@ const ControlForm = () => {
         defaultValues: {
             name: "",
             datepicker: "",
+            datepickerLanguage: "",
             region: "",
         },
         resolver: yupResolver(YupCustomFormSchema),
@@ -36,6 +38,15 @@ const ControlForm = () => {
 
     const [regionValue, setRegionValue] = useState(field.value);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const [language, setLanguage] = useState("");
+
+    const locale = getLocaleCalendar(language);
+
+    function onChangeLanguageValue(e) {
+        setLanguage(e.target.value);
+        setValue("datepickerLanguage", e.target.value);
+        // console.log(event.target.value);
+    }
 
     useEffect(() => {
         setValue("region", regionValue, { shouldValidate: true });
@@ -45,6 +56,7 @@ const ControlForm = () => {
         if (isSubmitSuccessful) {
             reset();
             setValue("region", "");
+            setValue("datepickerLanguage", "");
             setRegionValue("");
         }
     }, [isSubmitSuccessful, reset, setValue]);
@@ -65,6 +77,27 @@ const ControlForm = () => {
                 noValidate
             >
                 <div className={styles.wrapper}>
+                    <div onChange={onChangeLanguageValue}>
+                        Calendar language:
+                        <input
+                            type='radio'
+                            value='en'
+                            name='datepickerLanguage'
+                        />
+                        English
+                        <input
+                            type='radio'
+                            value='ua'
+                            name='datepickerLanguage'
+                        />
+                        Ukr
+                        <input
+                            type='radio'
+                            value='ru'
+                            name='datepickerLanguage'
+                        />
+                        rus
+                    </div>
                     <div className={styles.inputWrap}>
                         <p className={styles.error}>{errors.name?.message}</p>
                         <input
@@ -90,6 +123,7 @@ const ControlForm = () => {
                                     onChange={onChange}
                                     onBlur={onBlur}
                                     selected={value}
+                                    locale={locale}
                                     className={styles.dataPicker}
                                     placeholderText='Виберіть дату'
                                     dateFormat='dd.MM.yyyy'

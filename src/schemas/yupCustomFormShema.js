@@ -6,6 +6,7 @@ export const YupCustomFormSchema = yup.object({
         .required("Name is required")
         .min(2, "Name should be longer"),
     datepicker: yup.string().required("Datepicker is required"),
+    datepickerLanguage: yup.string(),
     region: yup
         .string()
         .required("Region is required"),
